@@ -15,6 +15,23 @@
                 - ex: 5 seconds = 5000
 */
 
+// function getData() {
+//     setTimeout(() => {
+//         return "some data"
+//     }, 3000)
+// };
+
+// let data = getData();
+// console.log(data);
+
+function getData(cb) {
+    setTimeout(() => {
+        cb('some data')
+    }, 3000)
+}
+
+// getData(data => console.log(data));
+// console.log('Hello World');
 
 //! Promise
 /* 
@@ -32,6 +49,20 @@
     ALWAYS returns an object
 */
 
+function returnData() {
+
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if(true) {
+                resolve('some data from Promise')
+            } else {
+                reject('This is a rejection')
+            }
+        })
+    })
+}
+
+// console.log(returnData());
 
 //! Resolvers
 /* 
@@ -39,7 +70,7 @@
 
     - Chained with a resolver
     - Takes in a callback function
-    - syntax notes: semicolo (;) placed ONLY after the last resolver
+    - syntax notes: semicolon (;) placed ONLY after the last resolver
 
 *       Keywords:
             .then(cb) 
@@ -47,8 +78,17 @@
                 - can be chained together
             .catch(cb)
                 - error
-
 */
+
+returnData()
+    .then(response => {
+        console.log('1st ', response)
+        return response
+    })
+    .then(data => console.log('2nd ', data))
+    .catch(function(err) {
+        console.error(err)
+    });
 
 
 //? The Process
